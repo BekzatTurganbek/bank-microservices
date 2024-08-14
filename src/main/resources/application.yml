@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 20112003b
+
+  liquibase:
+    change-log: classpath:liquibase/changelog.yml
+
+  feign:
+    client:
+      config:
+        default:
+          connectTimeout: 5000
+          readTimeout: 5000
+
+  external-api:
+    url: https://api.example.com
+    apiKey: your_api_key
+
+  logging:
+    level:
+      org.springframework: INFO

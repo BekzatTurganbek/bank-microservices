@@ -1,0 +1,291 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - createTable:
+            tableName: transaction
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: account_from
+                  type: BIGINT
+              - column:
+                  name: account_to
+                  type: BIGINT
+              - column:
+                  name: currency_shortname
+                  type: VARCHAR(3)
+              - column:
+                  name: sum
+                  type: DECIMAL(19,2)
+              - column:
+                  name: expense_category
+                  type: VARCHAR(50)
+              - column:
+                  name: datetime
+                  type: TIMESTAMP
+              - column:
+                  name: limit_exceeded
+                  type: BOOLEAN
+
+  - changeSet:
+      id: 2
+      author: your_name
+      changes:
+        - createTable:
+            tableName: expense_limit
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: limit_sum
+                  type: DECIMAL(19,2)
+              - column:
+                  name: limit_datetime
+                  type: TIMESTAMP
+              - column:
+                  name: limit_currency_shortname
+                  type: VARCHAR(3)
+              - column:
+                  name: expense_category
+                  type: VARCHAR(50)
+              - column:
+                  name: user_id
+                  type: BIGINT
+  - changeSet:
+      id: 3
+      author: your_name
+      changes:
+        - createTable:
+            tableName: currency_rate
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: currency_pair
+                  type: VARCHAR(7)
+              - column:
+                  name: date
+                  type: DATE
+              - column:
+                  name: rate
+                  type: DECIMAL(19,2)
+
+
+  - changeSet:
+      id: insert-transactions-1
+      author: Bekzat
+      changes:
+        - insert:
+            tableName: transaction
+            columns:
+              - column:
+                  name: account_from
+                  valueNumeric: 1234567890
+              - column:
+                  name: account_to
+                  valueNumeric: 9876543210
+              - column:
+                  name: currency_shortname
+                  value: USD
+              - column:
+                  name: sum
+                  valueNumeric: 500.00
+              - column:
+                  name: expense_category
+                  value: goods
+              - column:
+                  name: datetime
+                  valueDate: 2023-08-09T12:34:56
+              - column:
+                  name: limit_exceeded
+                  valueBoolean: false
+
+  - changeSet:
+      id: insert-transactions-2
+      author: Bekzat
+      changes:
+        - insert:
+            tableName: transaction
+            columns:
+              - column:
+                  name: account_from
+                  valueNumeric: 1234567890
+              - column:
+                  name: account_to
+                  valueNumeric: 9876543210
+              - column:
+                  name: currency_shortname
+                  value: EUR
+              - column:
+                  name: sum
+                  valueNumeric: 1000.00
+              - column:
+                  name: expense_category
+                  value: services
+              - column:
+                  name: datetime
+                  valueDate: 2023-08-09T14:20:00
+              - column:
+                  name: limit_exceeded
+                  valueBoolean: true
+
+  - changeSet:
+      id: insert-transactions-3
+      author: Bekzat
+      changes:
+        - insert:
+            tableName: transaction
+            columns:
+              - column:
+                  name: account_from
+                  valueNumeric: 1234567890
+              - column:
+                  name: account_to
+                  valueNumeric: 9876543210
+              - column:
+                  name: currency_shortname
+                  value: GBP
+              - column:
+                  name: sum
+                  valueNumeric: 700.00
+              - column:
+                  name: expense_category
+                  value: goods
+              - column:
+                  name: datetime
+                  valueDate: 2023-08-10T09:15:00
+              - column:
+                  name: limit_exceeded
+                  valueBoolean: true
+
+  - changeSet:
+      id: insert-expense-limits-1
+      author: yourname
+      changes:
+        - insert:
+            tableName: expense_limit
+            columns:
+              - column:
+                  name: limit_sum
+                  valueNumeric: 1000.00
+              - column:
+                  name: limit_datetime
+                  valueDate: 2023-08-01T00:00:00
+              - column:
+                  name: limit_currency_shortname
+                  value: USD
+              - column:
+                  name: expense_category
+                  value: goods
+              - column:
+                  name: user_id
+                  valueNumeric: 1
+
+  - changeSet:
+          id: insert-expense-limits-2
+          author: Bekzat
+          changes:
+            - insert:
+                tableName: expense_limit
+                columns:
+                  - column:
+                      name: limit_sum
+                      valueNumeric: 1500.00
+                  - column:
+                      name: limit_datetime
+                      valueDate: 2023-08-01T00:00:00
+                  - column:
+                      name: limit_currency_shortname
+                      value: EUR
+                  - column:
+                      name: expense_category
+                      value: services
+                  - column:
+                      name: user_id
+                      valueNumeric: 1
+
+  - changeSet:
+          id: insert-expense-limits-3
+          author: yourname
+          changes:
+            - insert:
+                tableName: expense_limit
+                columns:
+                  - column:
+                      name: limit_sum
+                      valueNumeric: 2000.00
+                  - column:
+                      name: limit_datetime
+                      valueDate: 2023-08-01T00:00:00
+                  - column:
+                      name: limit_currency_shortname
+                      value: GBP
+                  - column:
+                      name: expense_category
+                      value: goods
+                  - column:
+                      name: user_id
+                      valueNumeric: 2
+
+  - changeSet:
+      id: insert-currency-rates-1
+      author: Bekzat
+      changes:
+        - insert:
+            tableName: currency_rate
+            columns:
+              - column:
+                  name: currency_pair
+                  value: USD/EUR
+              - column:
+                  name: date
+                  valueDate: 2023-08-09
+              - column:
+                  name: rate
+                  valueNumeric: 0.90
+
+  - changeSet:
+            id: insert-currency-rates-2
+            author: Bekzat
+            changes:
+              - insert:
+                  tableName: currency_rate
+                  columns:
+                    - column:
+                        name: currency_pair
+                        value: USD/GBP
+                    - column:
+                        name: date
+                        valueDate: 2023-08-09
+                    - column:
+                        name: rate
+                        valueNumeric: 0.75
+
+  - changeSet:
+            id: insert-currency-rates-3
+            author: Bekzat
+            changes:
+              - insert:
+                  tableName: currency_rate
+                  columns:
+                    - column:
+                        name: currency_pair
+                        value: EUR/USD
+                    - column:
+                        name: date
+                        valueDate: 2023-08-09
+                    - column:
+                        name: rate
+                        valueNumeric: 1.11
