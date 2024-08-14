@@ -12,7 +12,7 @@ PostgreSQL: В качестве основной базы данных для х
 ## Установка
 
 1. Клонируйте репозиторий:
-   git clone https://github.com/ваш_репозиторий/bank-microservice.git
+   git clone [https://github.com/ваш_репозиторий/bank-microservice.git](https://github.com/BekzatTurganbek/bank-microservices)
    cd bank-microservice
    
 2. Настройте базу данных PostgreSQL:
